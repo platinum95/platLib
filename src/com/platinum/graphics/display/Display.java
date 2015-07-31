@@ -9,45 +9,49 @@ import processing.core.PApplet;
 public class Display {
 	
 
-	private static PVector res;
+	private static PVector res = new PVector(0, 0);
 	private static PVector ratio;
-	private PApplet that;
 	private static String renderType;
-	
 	
 	
 	public Display(PApplet g){
 		res = new PVector(g.displayWidth, g.displayHeight);	
-		this.that = g;
 	}
 	
 	public Display(int x, int y, PApplet g){
 		res = new PVector(x, y);
-		this.that = g;
 		
 	}
 	
-	public void setSize(Platbit.renderTypes renderMode){
+	
+	public static void setSize(Platbit.renderTypes renderMode, PApplet g){
 		switch(renderMode){
 		case NATIVE:
-			that.size((int) res.x, (int) res.y);
+			g.size((int) res.x, (int) res.y);
 			renderType = null;
+			break;
+			
 		case P2D:
-			that.size((int) res.x, (int) res.y, PApplet.P2D);
+			g.size((int) res.x, (int) res.y, PApplet.P2D);
 			renderType = PApplet.P2D;
+			break;
+			
 		case P3D:
-			that.size((int) res.x, (int) res.y, PApplet.P3D);
+			g.size((int) res.x, (int) res.y, PApplet.P3D);
 			renderType = PApplet.P3D;
+			break;
+			
 			
 		}
 		
 		
 	}
+
 	
-	
-	public void getRatio(PVector nativeRes){
+	public static void setRatio(PVector nativeRes){
 		Display.ratio = new PVector(Display.res.x/nativeRes.x, Display.res.y/nativeRes.y);
 	}
+	
 
 	public static PVector getRes() {
 		return res;
@@ -62,10 +66,22 @@ public class Display {
 		return new PVector(res.x * in.x, res.y * in.y);
 		
 	}
+	public static int getPosFromFloat(float in){
+		return (int) (in * res.x);
+		
+	}
 	
 	public static String getRenderType(){
 		return renderType;
 	}
+	
+	public static void setRes(int x, int y){
+		res = new PVector(x, y);
+	}
+	public static void setRes(PApplet g){
+		res = new PVector(g.displayWidth, g.displayHeight);
+	}
+	
 
 	
 	

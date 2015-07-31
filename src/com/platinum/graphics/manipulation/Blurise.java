@@ -11,7 +11,7 @@ public class Blurise {
 	
 	
 	protected static void setBlur(PApplet that){
-		Blurise.blur = that.loadShader("res/shaders/blur.glsl");
+		Blurise.blur = that.loadShader("res/Shaders/blur.glsl");
 		
 	}
 	

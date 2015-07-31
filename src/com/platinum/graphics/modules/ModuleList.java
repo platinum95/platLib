@@ -22,11 +22,14 @@ public class ModuleList {
 		this.moduleList.add(m);
 	}
 	
+	public void removeModule(Module m){
+		this.moduleList.remove(m);
+	}
+	
 	public void draw(PApplet g){
 		for(Module m: moduleList){
 			m.update();
 			m.draw(g);
-			System.out.println("1");
 		}
 	}
 	
@@ -47,14 +50,18 @@ public class ModuleList {
 			if(m.getName() == name)
 				return m;
 		}
+		System.out.println("Component " + name + " not found");
 		return null;
 	}
 	public void registerModules(Platbit p){
-		
 		for(Module m : moduleList){
 			p.registerListener(m);
 		}
 		
+	}
+	
+	public List<Module> getModuleList(){
+		return this.moduleList;
 	}
  
 }
